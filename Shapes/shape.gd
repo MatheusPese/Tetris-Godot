@@ -15,5 +15,3 @@ func update_shape_block_positions(null):
 func get_shape_block_positions():
 	update_shape_block_positions(null)
 	return shape_blocks_positions
-	pass
-

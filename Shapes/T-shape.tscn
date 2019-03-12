@@ -1,87 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Green Block [Tetris].png" type="Texture" id=1]
+[ext_resource path="res://Shapes/I-shape.tscn" type="PackedScene" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.9849, 8.02826 )
+[node name="T-shape" index="0" instance=ExtResource( 1 )]
 
-[node name="T-shape" type="Node2D"]
+[node name="Block" parent="." index="0"]
 editor/display_folded = true
-visible = false
+position = Vector2( 8, -8 )
 
-[node name="Block" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 24, 24 )
+[node name="Block2" parent="." index="1"]
+position = Vector2( -8, 8 )
 
-[node name="Sprite" type="Sprite" parent="Block"]
-position = Vector2( -8, -8 )
-texture = ExtResource( 1 )
-centered = false
-
-[node name="Area2D" type="Area2D" parent="Block"]
-editor/display_folded = true
-position = Vector2( 9.53674e-07, 9.53674e-07 )
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block/Area2D"]
-position = Vector2( -3.8147e-06, -3.8147e-06 )
-scale = Vector2( 4, 4 )
-shape = SubResource( 1 )
-
-[node name="Block2" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 24, 8 )
-
-[node name="Sprite" type="Sprite" parent="Block2"]
-position = Vector2( -8, -8 )
-texture = ExtResource( 1 )
-centered = false
-
-[node name="Area2D" type="Area2D" parent="Block2"]
-editor/display_folded = true
-position = Vector2( 9.53674e-07, 9.53674e-07 )
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block2/Area2D"]
-position = Vector2( -3.8147e-06, -3.8147e-06 )
-scale = Vector2( 4, 4 )
-shape = SubResource( 1 )
-
-[node name="Block3" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 8, 24 )
-
-[node name="Sprite" type="Sprite" parent="Block3"]
-position = Vector2( -8, -8 )
-texture = ExtResource( 1 )
-centered = false
-
-[node name="Area2D" type="Area2D" parent="Block3"]
-editor/display_folded = true
-position = Vector2( 9.53674e-07, 9.53674e-07 )
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block3/Area2D"]
-position = Vector2( -3.8147e-06, -3.8147e-06 )
-scale = Vector2( 4, 4 )
-shape = SubResource( 1 )
-
-[node name="Block4" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 40, 24 )
-
-[node name="Sprite" type="Sprite" parent="Block4"]
-position = Vector2( -8, -8 )
-texture = ExtResource( 1 )
-centered = false
-
-[node name="Area2D" type="Area2D" parent="Block4"]
-editor/display_folded = true
-position = Vector2( 9.53674e-07, 9.53674e-07 )
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Block4/Area2D"]
-position = Vector2( -3.8147e-06, -3.8147e-06 )
-scale = Vector2( 4, 4 )
-shape = SubResource( 1 )
+[node name="Block3" parent="." index="2"]
+position = Vector2( 8, 8 )
 
