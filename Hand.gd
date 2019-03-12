@@ -36,8 +36,7 @@ func _shape_move_down():
 	if  self.row + 1 != game.row:
 		self.position.y += game.GRID_SIZE_IN_PIXELS.y
 		
-
 func update_screen_block_array():
-	game.screen_block_array = game.create_2d_array(game.row, game.column, 0)
+	game.screen_block_array = game.create_2d_array(game.column, game.row, 0)
 	for i in get_child(0).shape_blocks_positions:
-		game.screen_block_array[i.x][i.y] = 1
+		game.screen_block_array[i.y][i.x] = 1
