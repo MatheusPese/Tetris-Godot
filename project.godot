@@ -23,6 +23,11 @@ config/icon="res://icon.png"
 
 gdscript/completion/autocomplete_setters_and_getters=true
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=81920
+limits/debugger_stdout/max_messages_per_frame=1000
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
