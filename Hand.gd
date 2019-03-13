@@ -37,11 +37,33 @@ func _rotate_shape_action():
 		
 func _move_shape_horizontal_action():
 	update_screen_block_array()
-	
-	var LEFT:int = int( Input.is_action_just_pressed( "ui_left" ) )
-	var RIGHT:int  = int( Input.is_action_just_pressed( "ui_right" ) )
+	var LEFT = _shape_move_left()
+	var RIGHT = _shape_move_right()
 
 	self.position += Vector2( ( RIGHT - LEFT ) * game.GRID_SIZE_IN_PIXELS.x, 0 )
+
+
+func _shape_move_left():
+	var LEFT:int = 0
+
+	for i in get_child(0).get_children():
+		print("L", int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x)+1, " | ", game.column)
+		if int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x) == 0:
+			return 0
+	LEFT = int( Input.is_action_just_pressed( "ui_left" ) )
+	return LEFT
+
+func _shape_move_right():
+	var RIGHT:int = 0
+
+	for i in get_child(0).get_children():
+		print("R", int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x)+1, " | ", game.column)
+		if int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x)+1 == game.column:
+			return 0
+		
+	RIGHT = int( Input.is_action_just_pressed( "ui_right" ) )
+	return RIGHT
+
 
 func _move_shape_vertical_action():
 	if Input.is_action_just_pressed( "ui_down" ):	
@@ -58,4 +80,5 @@ func _shape_move_down():
 func update_screen_block_array():
 	game.screen_block_array = game.create_2d_array(game.column, game.row, 0)
 	for i in get_child(0).shape_blocks_positions:
-		game.screen_block_array[int(i.y)][int(i.x)] = 1
+		if i.x < game.column && i.x > 0:
+			game.screen_block_array[int(i.y)][int(i.x)] = 1
