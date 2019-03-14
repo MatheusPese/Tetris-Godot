@@ -1,13 +1,46 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Shapes/I-shape.tscn" type="PackedScene" id=1]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+onready var shape_blocks = [$Block, $Block2, $Block3, $Block4]
+onready var shape_blocks_positions = [] setget update_shape_block_positions, get_shape_block_positions
+
+
+func _ready():
+	update_shape_block_positions(null)
+
+func update_shape_block_positions(null):
+	shape_blocks_positions = []
+	for i in shape_blocks:
+		shape_blocks_positions.append(i.global_position/16)
+
+func get_shape_block_positions():
+	update_shape_block_positions(null)
+	return shape_blocks_positions"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 24 )
+
 [node name="O-shape" instance=ExtResource( 1 )]
 modulate = Color( 0.92549, 0.870588, 0, 1 )
+script = SubResource( 1 )
 
-[node name="Block" parent="." index="0"]
-position = Vector2( 0, -16 )
+[node name="Block2" parent="." index="1"]
+position = Vector2( -16, 16 )
+
+[node name="Block3" parent="." index="2"]
+position = Vector2( 0, 16 )
 
 [node name="Block4" parent="." index="3"]
-position = Vector2( 16, -16 )
+position = Vector2( 0, 0 )
+
+[node name="RotationMask" parent="." index="4"]
+position = Vector2( -8, 8 )
+
+[node name="CollisionShape2D" parent="RotationMask" index="0"]
+position = Vector2( 8, -8 )
+shape = SubResource( 2 )
 
