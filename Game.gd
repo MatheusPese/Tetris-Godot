@@ -2,10 +2,10 @@ extends Node2D
 
 const GRID_SIZE_IN_PIXELS = Vector2(16,16)
 
-var row = 32
-var column = 16
+var row : int = 32
+var column : int = 16
 
-onready var screen_block_array = create_2d_array(column, row, 0)
+onready var screen_block_array : Array = create_2d_array(column, row, 0)
 
 onready var GameSpeed : float = 1
 onready var StepTimer = $StepTimer
@@ -20,7 +20,10 @@ func _process(delta):
 	StepTimer.wait_time = 1.5 - (GameSpeed/10.0)
 
 
-func create_2d_array(width, height, value):
+
+
+
+func create_2d_array(width, height, value) -> Array:
 	var a = []
 
 	for y in range(height):
