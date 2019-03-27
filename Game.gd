@@ -20,9 +20,6 @@ func _process(delta):
 	StepTimer.wait_time = 1.5 - (GameSpeed/10.0)
 
 
-
-
-
 func create_2d_array(width, height, value) -> Array:
 	var a = []
 

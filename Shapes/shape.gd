@@ -10,8 +10,7 @@ func _ready():
 func update_shape_block_positions(null):
 	shape_blocks_positions = []
 	for i in shape_blocks:
-		var block_position = Vector2( int(i.global_position.x/16),int(i.global_position.x/16) )
-		shape_blocks_positions.append( block_position )
+		shape_blocks_positions.append( i.global_position /16 )
 
 func get_shape_block_positions():
 	update_shape_block_positions(null)

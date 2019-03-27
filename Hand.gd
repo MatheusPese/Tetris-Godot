@@ -32,7 +32,7 @@ func add_shape_in_hand():
 		shape = s.instance()
 		self.add_child( shape )
 	else:
-		push_error("Error, do not add in a the hand when there is already a pice")
+		push_error("Error, do not add in the hand when there is already a pice")
 		
 
 func _rotate_shape_action():
@@ -42,67 +42,79 @@ func _rotate_shape_action():
 		
 func _move_shape_horizontal_action():
 	update_screen_block_array()
-	var LEFT = _shape_move_left()
-	var RIGHT = _shape_move_right()
+	var LEFT : int = _shape_move_left()
+	var RIGHT : int = _shape_move_right()
 
 	self.position += Vector2( ( RIGHT - LEFT ) * game.GRID_SIZE_IN_PIXELS.x, 0 )
 
 
 func _shape_move_left():
-	var LEFT:int = 0
+	var LEFT : int = 0
+	
 	if get_child(0) != null:
 		for i in get_child(0).get_children():
-			if int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x + 0.5) == 0:
+			if int((i.global_position.x+8) / game.GRID_SIZE_IN_PIXELS.x ) == 0:
 				return 0
+				
 	LEFT = int( Input.is_action_just_pressed( "ui_left" ) )
+	
 	return LEFT
 
 
 func _shape_move_right():
-	var RIGHT:int = 0
+	var RIGHT : int = 0
+	
 	if get_child(0) != null:
 		for i in get_child(0).get_children():
-			if int(i.global_position.x / game.GRID_SIZE_IN_PIXELS.x)+1 == game.column:
+			if int((i.global_position.x +16)/ game.GRID_SIZE_IN_PIXELS.x) == game.column:
 				return 0
 		
 	RIGHT = int( Input.is_action_just_pressed( "ui_right" ) )
+	
 	return RIGHT
 
 
 func _move_shape_vertical_action():
+	
 	if Input.is_action_just_pressed( "ui_down" ):	
 		_shape_move_down()
 
 
 func _shape_move_down():
 	var botton_row = game.row
+	
 	update_screen_block_array()
 	if get_child(0) != null:
 		for i in get_child(0).shape_blocks_positions:
-			var one_block_position = i.y+.5
-			print(one_block_position)
+			var one_block_position = i.y +.5
+			prints(botton_row, one_block_position)
 			if  one_block_position == botton_row:
 				place_shape()
-				return 0
+				return
 						
 	self.position.y += game.GRID_SIZE_IN_PIXELS.y
 
 	
 func update_screen_block_array():
 	game.screen_block_array = game.create_2d_array(game.column, game.row, 0)
+	
 	if get_child(0) != null:
 		for i in get_child(0).shape_blocks_positions:
 			if i.x < game.column && i.x > 0:
 				game.screen_block_array[int(i.y)][int(i.x)] = 1
 
+
 func place_shape():
 	var shape = get_child(0)
 	var shape_position = shape.global_position
 	var shape_rotation = shape.global_rotation
+	
 	remove_child(shape)
+	
 	shape.global_position = shape_position
 	shape.global_rotation = shape_rotation
+	
 	get_parent().add_child(shape)
 	
-	self.position = Vector2(8,8)
+	self.position = Vector2( OS.get_window_size().x/2+8, 8 )
 	add_shape_in_hand()
